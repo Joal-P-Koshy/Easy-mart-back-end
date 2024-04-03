@@ -31,7 +31,7 @@ exports.getItemsFromWishlist = async(req, res) => {
         const allProducts = await wishlists.find({userId})
         res.status(200).json(allProducts);
     } catch (error) {
-        res.status(401).json("Error in getting wishlist items", error)
+        res.status(401).json("Error in getting wishlist items")
     }
 
 }
@@ -39,13 +39,13 @@ exports.getItemsFromWishlist = async(req, res) => {
 
 exports.removeWishListItem = async(req, res) => {
 
-    const id = req.params;
+    const {id} = req.params;
 
     try {
-        const removedItem = await wishlists.findById({_id: id})
-        res.status(200).json("Item removed from wishlist",removedItem);
+        const removedItem = await wishlists.findByIdAndDelete({_id: id})
+        res.status(200).json({message:"deleted",data:removedItem});
     } catch (error) {
-        res.status(401).json("Error in removing wishlist items", error)
+        res.status(401).json("Error in removing wishlist items")
     }
 
 }

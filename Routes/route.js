@@ -11,6 +11,8 @@ const jwtMiddleware = require('../Middlewares/jwtMiddleware')
 
 const wishlistController = require('../Controller/wishlistController')
 
+const cartController = require('../Controller/cartController')
+
 // get all products
 router.get('/all-product', productController.getallProducts)
 
@@ -31,5 +33,22 @@ router.get('/wishlist/all-product', jwtMiddleware,wishlistController.getItemsFro
 
 // remove item from wishlist
 router.delete('/wishlist/removeItem/:id', jwtMiddleware,wishlistController.removeWishListItem)
+
+// add item to cart
+router.post('/add-cart', jwtMiddleware, cartController.addToCart)
+
+// get item from cart
+router.get('/cart/all-product', jwtMiddleware, cartController.getItemsFromCart)
+
+// remove item from cart
+router.delete('/cart/removeItem/:id', jwtMiddleware,cartController.removeCartItem)
+
+
+// increment in cart 
+router.get(`/cart/increment/:id`, jwtMiddleware, cartController.incrementItem)
+
+// decrement in cart 
+router.get(`/cart/decrement/:id`, jwtMiddleware, cartController.decrementItem)
+
 
 module.exports = router;
