@@ -99,3 +99,16 @@ exports.decrementItem = async (req, res) => {
         res.status(401).json("Error in decrementing cart items")
     }
 }
+
+
+exports.emptyCart = async(req, res) => {
+
+    const userId = req.payload;
+
+    try {
+        await carts.deleteMany({userId: userId})
+        res.status(200).json("cart deleted successfully")
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}

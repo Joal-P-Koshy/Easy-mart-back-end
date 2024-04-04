@@ -50,5 +50,8 @@ router.get(`/cart/increment/:id`, jwtMiddleware, cartController.incrementItem)
 // decrement in cart 
 router.get(`/cart/decrement/:id`, jwtMiddleware, cartController.decrementItem)
 
+// remove all cart items
+router.delete(`/removeCart`, jwtMiddleware, cartController.emptyCart)
+
 
 module.exports = router;
